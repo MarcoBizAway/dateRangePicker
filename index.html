@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <title>A little Angular site</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link rel="stylesheet" href="styles/md-date-range-picker.css">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+
+<body ng-app="MyApp" ng-cloak>
+  <md-content>
+    <md-date-range
+        ng-model="pickerModel"
+        one-panel="false">
+
+    </md-date-range>
+  </md-content>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+  <script src="scripts/md-date-range-picker.js"></script>
+
+  <script src="scripts/app.js"></script>
+
+</body>
+
+</html>
