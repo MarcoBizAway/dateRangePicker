@@ -206,7 +206,6 @@ module.exports = function (grunt) {
             'dev': [
                 'copy:dev',
                 'compass:dev',
-                'replace:dev',
                 'ngconstant:dev',
                 'ngtemplates'
             ],
@@ -280,6 +279,11 @@ module.exports = function (grunt) {
                 cmd: function (branch) {
                     return 'git push origin '+branch;
                 }
+            },
+            close_hotfix: {
+                cmd: function (branch) {
+                    return 'git hotfix finish '+branch;
+                }
             }
         },
     });
@@ -313,20 +317,19 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('deploy', 'Compile distribution files, merge develop into master and push for deploy', function (branch) {
-        // if (!from_branch) {
-        //     from_branch = 'develop';
-        // }
-        // if (!to_branch) {
-        //     to_branch = 'master';
-        // }
+    grunt.registerTask('deploy', 'Compile distribution files, merge develop into master and push for deploy', function () {
         grunt.task.run([
             'build',
-            'exec:commit_dist'
-            // 'exec:checkout:'+to_branch,
-            // 'exec:merge:'+from_branch,
-            // 'exec:push:'+to_branch,
-            // 'exec:checkout:'+from_branch
+            'exec:commit_dist',
+            'exec:close_hotfix'
+        ]);
+    });
+
+    grunt.registerTask('build_and_commit', 'Compile distribution files and push dist changes', function () {
+        grunt.task.run([
+            'build',
+            'exec:commit_dist',
+            'exec:close_hotfix'
         ]);
     });
 };
