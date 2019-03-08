@@ -328,8 +328,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build_and_commit', 'Compile distribution files and push dist changes', function () {
         grunt.task.run([
             'build',
-            'exec:commit_dist',
-            'exec:close_hotfix'
+            'exec:commit_dist'
         ]);
     });
 };
