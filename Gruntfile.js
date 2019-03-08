@@ -313,7 +313,7 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('deploy', 'Compile distribution files, merge develop into master and push for deploy', function (branch) {
+    grunt.registerTask('deploy', 'Compile distribution files, merge develop into master and push for deploy', function () {
         // if (!from_branch) {
         //     from_branch = 'develop';
         // }
@@ -327,6 +327,13 @@ module.exports = function (grunt) {
             // 'exec:merge:'+from_branch,
             // 'exec:push:'+to_branch,
             // 'exec:checkout:'+from_branch
+        ]);
+    });
+
+    grunt.registerTask('build_and_commit', 'Compile distribution files and push dist changes', function () {
+        grunt.task.run([
+            'build',
+            'exec:commit_dist'
         ]);
     });
 };
