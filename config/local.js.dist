@@ -1,0 +1,24 @@
+/*
+ * For other configuration check the default.js file.
+ */
+
+module.exports = {
+    frontend: {
+        server: 'local',
+
+        // Your api endpoint
+        api_endpoint: "http://192.168.1.9:8080",
+        domain_name: 'bizaway.dev',
+        access_cookie_sa_name: 'access_sa_token_local',
+        access_cookie_name: 'access_token_local',
+        intercom: {
+            is_active: true,
+            app_id: 'e61h5tyr'
+        }
+    },
+    backend: {
+        // Host and port of the platform
+        host: 'localhost',
+        port: 9000
+    }
+};
