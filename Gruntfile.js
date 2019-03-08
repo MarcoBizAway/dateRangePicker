@@ -13,7 +13,6 @@ module.exports = function (grunt) {
 
     // Automatically load required Grunt tasks
     require('jit-grunt')(grunt, {
-        useminPrepare: 'grunt-usemin',
         ngtemplates: 'grunt-angular-templates',
         ngconstant: 'grunt-ng-constant'
     });
@@ -137,109 +136,6 @@ module.exports = function (grunt) {
             },
         },
 
-        // Renames files for browser caching purposes
-        filerev: {
-            'dist': {
-                src: [
-                    '<%= paths.dist %>/scripts/{,*/}*.js',
-                    '<%= paths.dist %>/styles/{,*/}*.css',
-                    '<%= paths.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-                    '!<%= paths.dist %>/images/bg/{,*/}*.jpg',
-                    '!<%= paths.dist %>/images/static/{,*/}*',
-                    //'<%= paths.dist %>/fonts/**'
-                ]
-            }
-        },
-
-        // Reads HTML for usemin blocks to enable smart builds that automatically
-        // concat, minify and revision files. Creates configurations in memory so
-        // additional tasks can operate on them
-        useminPrepare: {
-            html: '<%= paths.app %>/index.html',
-            options: {
-                dest: '<%= paths.dist %>',
-                flow: {
-                    html: {
-                        steps: {
-                            js: ['concat', 'uglifyjs'],
-                            css: ['cssmin']
-                        },
-                        post: {}
-                    }
-                }
-            }
-        },
-
-        // Performs rewrites based on filerev and the useminPrepare configuration
-        usemin: {
-            html: ['<%= paths.dist %>/{,*/}*.html'],
-            css: ['<%= paths.dist %>/styles/**/*.css'],
-            js: ['<%= paths.dist %>/scripts/**/*.js', '<%= paths.tmp %>/scripts/**/*.js'],
-            options: {
-                assetsDirs: [
-                    '<%= paths.dist %>',
-                    '<%= paths.dist %>/images',
-                    '<%= paths.dist %>/styles',
-                    '<%= paths.dist %>/scripts',
-                ],
-                patterns: {
-                    js: [
-                        [/(images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']
-                    ],
-                    html: [
-                        [/(images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the Html to reference our revved images']
-                    ],
-                }
-            }
-        },
-
-        uglify: {
-            options: {
-                mangle: false,
-                sourceMap: true
-            }
-        },
-
-        imagemin: {
-            'dist': {
-                files: [{
-                    expand: true,
-                    cwd: '<%= paths.app %>/images',
-                    src: '{,*/}*.{png,jpg,jpeg,gif}',
-                    dest: '<%= paths.dist %>/images'
-                }]
-            }
-        },
-
-        svgmin: {
-            'dist': {
-                files: [{
-                    expand: true,
-                    cwd: '<%= paths.app %>/images',
-                    src: '{,*/}*.svg',
-                    dest: '<%= paths.dist %>/images'
-                }]
-            }
-        },
-
-        htmlmin: {
-            'dist': {
-                options: {
-                    collapseWhitespace: true,
-                    conservativeCollapse: true,
-                    collapseBooleanAttributes: true,
-                    removeCommentsFromCDATA: true,
-                    removeOptionalTags: true
-                },
-                files: [{
-                    expand: true,
-                    cwd: '<%= paths.dist %>',
-                    src: ['*.html'],
-                    dest: '<%= paths.dist %>'
-                }]
-            }
-        },
-
         // ng-annotate tries to make the code safe for minification automatically
         // by using the Angular long form for dependency injection.
         ngAnnotate: {
@@ -319,9 +215,6 @@ module.exports = function (grunt) {
                 'ngconstant:dist', // create file configs.js
                 'ngtemplates', // html to templates.js
                 'compass:dist', // output styles/*.css
-                'imagemin:dist', // works on images
-                'svgmin:dist', // svg
-                'replace:dist',
             ]
         },
 
@@ -389,44 +282,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-        replace: {
-            'dev': {
-                options: {
-                    patterns: [
-                        {
-                            match: 'icomoon_style_path',
-                            replacement: 'https://i.icomoon.io/public/e6ec1cca65/BizAway/style.css'
-                        }
-                    ]
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= paths.app %>',
-                        src: ['./index.html'],
-                        dest: '<%= paths.tmp %>'
-                    }
-                ],
-            },
-            'dist': {
-                options: {
-                    patterns: [
-                        {
-                            match: 'icomoon_style_path',
-                            replacement: 'https://d1azc1qln24ryf.cloudfront.net/126923/BizAway/style-cf.css?' + Math.floor(Math.random() * 10000)
-                        }
-                    ]
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= paths.app %>',
-                        src: ['./index.html'],
-                        dest: '<%= paths.dist %>'
-                    }
-                ],
-            }
-        }
     });
 
     grunt.registerTask('run', 'Run the server', function (env) {
@@ -454,14 +309,7 @@ module.exports = function (grunt) {
         grunt.task.run([
             'clean:dist',
             'copy:dist',
-            'useminPrepare',
-            'concurrent:dist',
-            'concat:generated',
-            'uglify:generated',
-            'cssmin:generated',
-            'filerev',
-            'usemin',
-            'htmlmin'
+            'concurrent:dist'
         ]);
     });
 
