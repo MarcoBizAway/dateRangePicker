@@ -313,20 +313,20 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('deploy', 'Compile distribution files, merge develop into master and push for deploy', function (from_branch, to_branch) {
-        if (!from_branch) {
-            from_branch = 'develop';
-        }
-        if (!to_branch) {
-            to_branch = 'master';
-        }
+    grunt.registerTask('deploy', 'Compile distribution files, merge develop into master and push for deploy', function (branch) {
+        // if (!from_branch) {
+        //     from_branch = 'develop';
+        // }
+        // if (!to_branch) {
+        //     to_branch = 'master';
+        // }
         grunt.task.run([
             'build',
-            'exec:commit_dist',
-            'exec:checkout:'+to_branch,
-            'exec:merge:'+from_branch,
-            'exec:push:'+to_branch,
-            'exec:checkout:'+from_branch
+            'exec:commit_dist'
+            // 'exec:checkout:'+to_branch,
+            // 'exec:merge:'+from_branch,
+            // 'exec:push:'+to_branch,
+            // 'exec:checkout:'+from_branch
         ]);
     });
 };
