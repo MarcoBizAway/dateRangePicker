@@ -282,7 +282,7 @@ module.exports = function (grunt) {
             },
             close_hotfix: {
                 cmd: function (branch) {
-                    return 'git hotfix finish '+branch;
+                    return 'git flow hotfix finish '+branch;
                 }
             }
         },
