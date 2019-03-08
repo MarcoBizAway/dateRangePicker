@@ -280,11 +280,7 @@ module.exports = function (grunt) {
                     return 'git push origin '+branch;
                 }
             },
-            close_hotfix: {
-                cmd: function (branch) {
-                    return 'git hotfix finish '+branch;
-                }
-            }
+            close_hotfix: 'git flow hotfix finish'
         },
     });
 
@@ -328,8 +324,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build_and_commit', 'Compile distribution files and push dist changes', function () {
         grunt.task.run([
             'build',
-            'exec:commit_dist',
-            'exec:close_hotfix'
+            'exec:commit_dist'
         ]);
     });
 };
