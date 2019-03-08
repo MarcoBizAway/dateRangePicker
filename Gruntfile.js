@@ -206,7 +206,6 @@ module.exports = function (grunt) {
             'dev': [
                 'copy:dev',
                 'compass:dev',
-                'replace:dev',
                 'ngconstant:dev',
                 'ngtemplates'
             ],
