@@ -281,7 +281,8 @@ module.exports = function (grunt) {
                     return 'git push origin '+branch;
                 }
             },
-            close_hotfix: 'git flow hotfix finish'
+            close_hotfix: 'git flow hotfix finish',
+            delete_hotfix: 'git flow hotfix delete'
         },
     });
 
@@ -326,7 +327,8 @@ module.exports = function (grunt) {
         grunt.task.run([
             'build',
             'exec:commit_dist',
-            'exec:close_hotfix'
+            'exec:close_hotfix',
+            'exec:delete_hotfix'
         ]);
     });
 };
