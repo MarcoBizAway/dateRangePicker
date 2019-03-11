@@ -287,7 +287,12 @@ module.exports = function (grunt) {
                 cmd: function (branch) {
                     return 'git branch -d '+branch;
                 }
-            }
+            },
+            commit: {
+                cmd: function (message) {
+                    return 'git add . && git commit -am "' + message + '"';
+                }
+            },
         },
     });
 
@@ -320,10 +325,11 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('hotfix', 'Compile distribution files and push dist changes', function (hotfix) {
+    grunt.registerTask('hotfix', '[Hotfix] Compile distribution files, commit, merge and delete the branch', function (hotfix) {
+        var commit = '[Hotfix] ' + hotfix + ' dist files';
         grunt.task.run([
             'build',
-            'exec:commit_dist',
+            'exec:commit:'+commit,
             'exec:checkout:master',
             'exec:merge:hotfix/'+hotfix,
             'exec:checkout:develop',
@@ -332,10 +338,11 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('release', 'Compile distribution files and push dist changes', function (release) {
+    grunt.registerTask('release', '[Release] Compile distribution files, commit, merge and delete the branch', function (release) {
+        var commit = '[Release] ' + release + ' dist files';
         grunt.task.run([
             'build',
-            'exec:commit_dist',
+            'exec:commit:'+commit,
             'exec:checkout:master',
             'exec:merge:release/'+release,
             'exec:checkout:develop',
