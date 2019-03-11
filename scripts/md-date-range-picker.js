@@ -737,7 +737,6 @@
                         $mdDialog.hide($scope.model);
                     }
 
-                    console.log('entra');
 
                     $scope.cancel = function () {
                         $mdDialog.cancel();
