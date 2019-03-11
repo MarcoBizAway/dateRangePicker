@@ -328,7 +328,7 @@ module.exports = function (grunt) {
             'exec:merge_hotfix',
             'exec:checkout:develop',
             'exec:merge_hotfix',
-            'exec:delete_hotfix:'+hotfix
+            'exec:delete:'+hotfix
         ]);
     });
 };
