@@ -737,6 +737,7 @@
                         $mdDialog.hide($scope.model);
                     }
 
+                    console.log('emntra');
 
                     $scope.cancel = function () {
                         $mdDialog.cancel();
