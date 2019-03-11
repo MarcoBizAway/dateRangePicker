@@ -281,7 +281,6 @@ module.exports = function (grunt) {
                     return 'git push origin '+branch;
                 }
             },
-            merge_hotfix: 'git merge --no-ff',
             tag_hotfix: 'git tag -a hotfix',
             delete: {
                 cmd: function (branch) {
@@ -325,9 +324,9 @@ module.exports = function (grunt) {
             'build',
             'exec:commit_dist',
             'exec:checkout:master',
-            'exec:merge_hotfix',
+            'exec:merge:hotfix/'+hotfix,
             'exec:checkout:develop',
-            'exec:merge_hotfix',
+            'exec:merge:hotfix/'+hotfix,
             'exec:delete:'+hotfix
         ]);
     });
