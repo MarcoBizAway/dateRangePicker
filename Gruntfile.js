@@ -281,8 +281,12 @@ module.exports = function (grunt) {
                     return 'git push origin '+branch;
                 }
             },
-            close_hotfix: 'git flow hotfix finish -m prova',
-            delete_hotfix: 'git flow hotfix delete'
+            tag_hotfix: 'git tag -a hotfix',
+            delete: {
+                cmd: function (branch) {
+                    return 'git branch -d hotfix/'+branch;
+                }
+            }
         },
     });
 
@@ -315,11 +319,15 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('build_and_commit', 'Compile distribution files and push dist changes', function () {
+    grunt.registerTask('hotfix', 'Compile distribution files and push dist changes', function (hotfix) {
         grunt.task.run([
             'build',
             'exec:commit_dist',
-            'exec:close_hotfix'
+            'exec:checkout:master',
+            'exec:merge:hotfix/'+hotfix,
+            'exec:checkout:develop',
+            'exec:merge:hotfix/'+hotfix,
+            'exec:delete:'+hotfix
         ]);
     });
 };
