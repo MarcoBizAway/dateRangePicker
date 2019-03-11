@@ -285,7 +285,7 @@ module.exports = function (grunt) {
             tag_hotfix: 'git tag -a hotfix',
             delete: {
                 cmd: function (branch) {
-                    return 'git branch -d hotfix/'+branch;
+                    return 'git branch -d '+branch;
                 }
             }
         },
@@ -328,7 +328,7 @@ module.exports = function (grunt) {
             'exec:merge:hotfix/'+hotfix,
             'exec:checkout:develop',
             'exec:merge:hotfix/'+hotfix,
-            'exec:delete:'+hotfix
+            'exec:delete:hotfix/'+hotfix
         ]);
     });
 
@@ -340,7 +340,7 @@ module.exports = function (grunt) {
             'exec:merge:release/'+release,
             'exec:checkout:develop',
             'exec:merge:release/'+release,
-            'exec:delete:'+release
+            'exec:delete:release/'+release
         ]);
     });
 };
