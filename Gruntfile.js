@@ -282,6 +282,7 @@ module.exports = function (grunt) {
                 }
             },
             close_hotfix: function () {
+                console.log(nodegit);
                 nodegit.Flow.finishHotfix();
             }
         },
