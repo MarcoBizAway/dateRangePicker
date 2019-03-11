@@ -266,7 +266,7 @@ module.exports = function (grunt) {
         },
 
         exec: {
-            commit_dist: 'git add . && git commit -am "[Auto] - Compiled distribution files"',
+            commit_dist: 'git add . && git commit -am "[Auto] - Compiled distribution file"',
             checkout: {
                 cmd: function (branch) {
                     return 'git checkout '+branch;
@@ -286,7 +286,12 @@ module.exports = function (grunt) {
                 cmd: function (branch) {
                     return 'git branch -d '+branch;
                 }
-            }
+            },
+            commit: {
+                cmd: function (message) {
+                    return 'git add . && git commit -am "' + message + '"';
+                }
+            },
         },
     });
 
@@ -319,16 +324,11 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('build_and_commit', 'Compile distribution files and commit', function () {
+    grunt.registerTask('hotfix', '[Hotfix] Compile distribution files, commit, merge and delete the branch', function (hotfix) {
+        var commit = '[Hotfix] ' + hotfix + ' dist files';
         grunt.task.run([
             'build',
-            'exec:commit_dist'
-        ]);
-    });
-
-    grunt.registerTask('hotfix', '[Hotfix] Compile distribution files, commit, merge and delete the branch', function (hotfix) {
-        grunt.task.run([
-            'build_and_commit',
+            'exec:commit:'+commit,
             'exec:checkout:master',
             'exec:merge:hotfix/'+hotfix,
             'exec:checkout:develop',
@@ -338,8 +338,10 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('release', '[Release] Compile distribution files, commit, merge and delete the branch', function (release) {
+        var commit = '[Release] ' + release + ' dist files';
         grunt.task.run([
-            'build_and_commit',
+            'build',
+            'exec:commit:'+commit,
             'exec:checkout:master',
             'exec:merge:release/'+release,
             'exec:checkout:develop',
