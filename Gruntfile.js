@@ -281,10 +281,7 @@ module.exports = function (grunt) {
                     return 'git push origin '+branch;
                 }
             },
-            close_hotfix: function () {
-                console.log(nodegit);
-                nodegit.Flow.finishHotfix();
-            }
+            close_hotfix: 'git flow hotfix finish'
         },
     });
 
