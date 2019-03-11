@@ -266,7 +266,7 @@ module.exports = function (grunt) {
         },
 
         exec: {
-            commit_dist: 'git add . && git commit -am "[Auto] - Compiled distribution files"',
+            commit_dist: 'git add . && git commit -am "[Auto] - Compiled distribution file"',
             checkout: {
                 cmd: function (branch) {
                     return 'git checkout '+branch;
