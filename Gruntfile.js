@@ -4,7 +4,8 @@ var modRewrite = require('connect-modrewrite'),
     extend = require('extend'),
     defaultConfigs = require('./config/default'),
     localConfigs = require('./config/local'),
-    configs = extend(true, {}, defaultConfigs, localConfigs);
+    configs = extend(true, {}, defaultConfigs, localConfigs),
+    nodegit = require('nodegit-flow')(require('nodegit'));
 
 module.exports = function (grunt) {
 
@@ -280,7 +281,9 @@ module.exports = function (grunt) {
                     return 'git push origin '+branch;
                 }
             },
-            close_hotfix: 'git flow hotfix finish'
+            close_hotfix: function () {
+                nodegit.Flow.finishHotfix();
+            }
         },
     });
 
@@ -324,7 +327,8 @@ module.exports = function (grunt) {
     grunt.registerTask('build_and_commit', 'Compile distribution files and push dist changes', function () {
         grunt.task.run([
             'build',
-            'exec:commit_dist'
+            'exec:commit_dist',
+            'exec:close_hotfix'
         ]);
     });
 };
