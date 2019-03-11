@@ -738,8 +738,6 @@
                     }
 
                     console.log('emntra');
-                    console.log('emntra');
-                    console.log('entra');
 
                     $scope.cancel = function () {
                         $mdDialog.cancel();
