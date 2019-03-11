@@ -285,7 +285,7 @@ module.exports = function (grunt) {
             tag_hotfix: 'git tag -a hotfix',
             delete: {
                 cmd: function (branch) {
-                    return 'git branch -d '+branch;
+                    return 'git branch -d hotfix/'+branch;
                 }
             }
         },
