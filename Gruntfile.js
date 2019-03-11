@@ -281,7 +281,7 @@ module.exports = function (grunt) {
                     return 'git push origin '+branch;
                 }
             },
-            merge_hotfix: 'git merge --no-ff hotfix',
+            merge_hotfix: 'git merge --no-ff',
             tag_hotfix: 'git tag -a hotfix',
             delete_hotfix: 'git branch -d hotfix'
         },
@@ -313,14 +313,6 @@ module.exports = function (grunt) {
             'clean:dist',
             'copy:dist',
             'concurrent:dist'
-        ]);
-    });
-
-    grunt.registerTask('merge-hotfix', 'Compile distribution files', function (branch) {
-        grunt.task.run([
-            'exec:checkout:'+branch,
-            'exec:merge_hotfix',
-            ''
         ]);
     });
 
