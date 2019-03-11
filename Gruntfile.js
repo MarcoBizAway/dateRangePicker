@@ -283,7 +283,7 @@ module.exports = function (grunt) {
             },
             merge_hotfix: 'git merge --no-ff',
             tag_hotfix: 'git tag -a hotfix',
-            delete_hotfix: 'git branch -d hotfix'
+            delete_hotfix: 'git branch -d'
         },
     });
 
@@ -316,7 +316,8 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('hotfix', 'Compile distribution files and push dist changes', function () {
+    grunt.registerTask('hotfix', 'Compile distribution files and push dist changes', function (hotfix) {
+        grunt.log.write(hotfix);
         grunt.task.run([
             'build',
             'exec:commit_dist',
