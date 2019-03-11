@@ -5,7 +5,7 @@ var modRewrite = require('connect-modrewrite'),
     defaultConfigs = require('./config/default'),
     localConfigs = require('./config/local'),
     configs = extend(true, {}, defaultConfigs, localConfigs),
-    nodegit = require('nodegit-flow')(require('nodegit'));
+    nodegit = require('nodegit-flow');
 
 module.exports = function (grunt) {
 
