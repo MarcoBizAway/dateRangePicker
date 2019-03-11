@@ -322,7 +322,6 @@ module.exports = function (grunt) {
             'exec:commit_dist',
             'exec:checkout:master',
             'exec:merge_hotfix',
-            'exec:tag_hotfix',
             'exec:checkout:develop',
             'exec:merge_hotfix',
             'exec:delete_hotfix'
