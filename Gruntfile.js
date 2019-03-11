@@ -287,8 +287,7 @@ module.exports = function (grunt) {
                 cmd: function (branch) {
                     return 'git branch -d hotfix/'+branch;
                 }
-            },
-            get_branch_name: "git branch"
+            }
         },
     });
 
@@ -322,12 +321,6 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('hotfix', 'Compile distribution files and push dist changes', function (hotfix) {
-
-        grunt.prova = grunt.task.run(['exec:get_branch_name']);
-        grunt.log.write(grunt.prova);
-
-        return;
-
         grunt.task.run([
             'build',
             'exec:commit_dist',
@@ -339,21 +332,15 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('release', 'Compile distribution files and push dist changes', function (hotfix) {
-
-        grunt.log(hotfix);
-
-
-
-        return;
+    grunt.registerTask('release', 'Compile distribution files and push dist changes', function (release) {
         grunt.task.run([
             'build',
             'exec:commit_dist',
             'exec:checkout:master',
-            'exec:merge:hotfix/'+hotfix,
+            'exec:merge:release/'+release,
             'exec:checkout:develop',
-            'exec:merge:hotfix/'+hotfix,
-            'exec:delete:'+hotfix
+            'exec:merge:release/'+release,
+            'exec:delete:'+release
         ]);
     });
 };
