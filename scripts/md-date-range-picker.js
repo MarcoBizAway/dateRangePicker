@@ -736,6 +736,10 @@
                         $scope.model.dateEnd && $scope.model.dateEnd.setHours(23, 59, 59, 999);
                         $mdDialog.hide($scope.model);
                     }
+
+                    console.log('emntra');
+                    console.log('emntra');
+
                     $scope.cancel = function () {
                         $mdDialog.cancel();
                     }

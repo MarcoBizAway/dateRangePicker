@@ -4,7 +4,8 @@ var modRewrite = require('connect-modrewrite'),
     extend = require('extend'),
     defaultConfigs = require('./config/default'),
     localConfigs = require('./config/local'),
-    configs = extend(true, {}, defaultConfigs, localConfigs);
+    configs = extend(true, {}, defaultConfigs, localConfigs),
+    nodegit = require('nodegit-flow');
 
 module.exports = function (grunt) {
 
@@ -206,7 +207,6 @@ module.exports = function (grunt) {
             'dev': [
                 'copy:dev',
                 'compass:dev',
-                'replace:dev',
                 'ngconstant:dev',
                 'ngtemplates'
             ],
@@ -281,11 +281,16 @@ module.exports = function (grunt) {
                     return 'git push origin '+branch;
                 }
             },
+<<<<<<< HEAD
             close_hotfix: {
                 cmd: function (branch) {
                     return 'git flow hotfix finish '+branch;
                 }
             }
+=======
+            close_hotfix: 'git flow hotfix finish -m prova',
+            delete_hotfix: 'git flow hotfix delete'
+>>>>>>> h-2
         },
     });
 
@@ -319,19 +324,27 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('deploy', 'Compile distribution files, merge develop into master and push for deploy', function () {
+<<<<<<< HEAD
         // if (!from_branch) {
         //     from_branch = 'develop';
         // }
         // if (!to_branch) {
         //     to_branch = 'master';
         // }
+=======
         grunt.task.run([
             'build',
-            'exec:commit_dist'
-            // 'exec:checkout:'+to_branch,
-            // 'exec:merge:'+from_branch,
-            // 'exec:push:'+to_branch,
-            // 'exec:checkout:'+from_branch
+            'exec:commit_dist',
+            'exec:close_hotfix'
+        ]);
+    });
+
+    grunt.registerTask('build_and_commit', 'Compile distribution files and push dist changes', function () {
+>>>>>>> h-2
+        grunt.task.run([
+            'build',
+            'exec:commit_dist',
+            'exec:close_hotfix'
         ]);
     });
 
