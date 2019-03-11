@@ -736,6 +736,11 @@
                         $scope.model.dateEnd && $scope.model.dateEnd.setHours(23, 59, 59, 999);
                         $mdDialog.hide($scope.model);
                     }
+
+                    console.log('entra');
+                    console.log('entra');
+                    console.log('entra');
+
                     $scope.cancel = function () {
                         $mdDialog.cancel();
                     }
